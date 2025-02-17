@@ -28,6 +28,11 @@ function App() {
       <MainContent />    
       <Footer />          
     </div>
+    return (
+    <UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
+  );
        <div>
             <WelcomeMessage /> 
         </div>
