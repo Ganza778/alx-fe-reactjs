@@ -32,6 +32,17 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <Router>
+      <div className="App">
+        <h1>Recipe Sharing App</h1>
+        <AddRecipeForm />
+
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
+    </Router>
     </>
   )
 }
