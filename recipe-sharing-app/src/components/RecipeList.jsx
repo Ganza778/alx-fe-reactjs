@@ -1,9 +1,11 @@
 // src/components/RecipeList.jsx
 import { Link } from 'react-router-dom';
 import { useRecipeStore } from '../recipeStore';
+import SearchBar from './SearchBar';
 
 const RecipeList = () => {
-  const recipes = useRecipeStore(state => state.recipes);
+  const filteredRecipes = useRecipeStore(state => state.filteredRecipes);
+  const recipes = filteredRecipes.length > 0 ? filteredRecipes : useRecipeStore(state => state.recipes);
 
   return (
     <div>
