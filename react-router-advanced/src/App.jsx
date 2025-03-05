@@ -1,53 +1,35 @@
+// src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import ProfileDetails from "./pages/ProfileDetails";
-import ProfileSettings from "./pages/ProfileSettings";
-import BlogPost from "./pages/BlogPost";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";  // Home page component
+import Profile from "./pages/Profile";  // Profile page (which contains the Outlet for nested routes)
+import ProfileDetails from "./pages/ProfileDetails";  // Profile Details page
+import ProfileSettings from "./pages/ProfileSettings";  // Profile Settings page
+import BlogPost from "./pages/BlogPost";  // Dynamic Blog post page component
+import ProtectedRoute from "./components/ProtectedRoute";  // Protected Route component to check authentication
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
     <Router>
       <Routes>
+        {/* Default Home route */}
         <Route path="/" element={<Home />} />
+
+        {/* Protected Route: Only authenticated users can access /profile */}
         <Route path="/profile" element={<ProtectedRoute />}>
+          {/* This will render Profile.jsx */}
+          <Route index element={<Profile />} />
+          
+          {/* Nested Routes */}
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
+
+        {/* Dynamic Route for Blog Posts */}
         <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  );
 }
 
-export default App
+export default App;
