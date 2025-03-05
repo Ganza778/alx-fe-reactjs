@@ -18,9 +18,15 @@ const PostsComponent = () => {
     {
       // Cache for 5 minutes
       cacheTime: 5 * 60 * 1000, // 5 minutes in milliseconds
+
+      // Data is considered "fresh" for 5 minutes
+      staleTime: 5 * 60 * 1000, // 5 minutes in milliseconds
+
       // Keep the previous data while fetching new data (useful for pagination or updating)
       keepPreviousData: true,
-      refetchOnWindowFocus: false, // Don't refetch on window focus
+
+      // Disable refetching on window focus to avoid unnecessary API calls
+      refetchOnWindowFocus: false,
     }
   );
 
