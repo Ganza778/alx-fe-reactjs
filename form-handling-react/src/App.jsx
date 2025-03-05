@@ -1,7 +1,7 @@
 import React from "react";
-import FormikForm from "formikForm";
+import FormikForm from "./components/FormikForm";
 import React from "react";
-import RegistrationForm from "registrationForm";
+import RegistrationForm from "./components/registrationForm";
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
