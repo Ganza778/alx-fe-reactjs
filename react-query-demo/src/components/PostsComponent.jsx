@@ -1,30 +1,34 @@
-// src/components/PostsComponent.js
+// src/components/PostsComponent.jsx
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 // Define the fetch function
 const fetchPosts = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
   if (!response.ok) {
-    throw new Error("Network error");
+    throw new Error("Failed to fetch posts");
   }
   return response.json();
 };
 
 const PostsComponent = () => {
-  const { data, error, isLoading, refetch } = useQuery("posts", fetchPosts, {
-    // Cache data for 5 minutes before refetching
-    staleTime: 5 * 60 * 1000,
-    // Refetch data on window focus
-    refetchOnWindowFocus: false,
-  });
+  const { data, error, isLoading, isError, refetch } = useQuery(
+    "posts", // The query key
+    fetchPosts, // Fetch function
+    {
+      // Optional settings for React Query
+      staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+      refetchOnWindowFocus: false, // Don't refetch on window focus
+    }
+  );
 
-  // Error handling
+  // Loading state
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  // Error state
+  if (isError) {
     return <div>Error: {error.message}</div>;
   }
 
