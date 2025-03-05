@@ -16,8 +16,10 @@ const PostsComponent = () => {
     "posts", // The query key
     fetchPosts, // Fetch function
     {
-      // Optional settings for React Query
-      staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+      // Cache for 5 minutes
+      cacheTime: 5 * 60 * 1000, // 5 minutes in milliseconds
+      // Keep the previous data while fetching new data (useful for pagination or updating)
+      keepPreviousData: true,
       refetchOnWindowFocus: false, // Don't refetch on window focus
     }
   );
