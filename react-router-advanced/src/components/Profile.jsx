@@ -1,6 +1,6 @@
 // src/pages/Profile.jsx
 import React from "react";
-import { Link, Outlet } from "react-router-dom"; // `Outlet` is where nested routes will render
+import { Link, Outlet } from "react-router-dom"; // Link for navigation and Outlet for rendering nested routes
 
 function Profile() {
   return (
@@ -12,7 +12,7 @@ function Profile() {
         <Link to="settings">Profile Settings</Link>
       </nav>
       <hr />
-      {/* Outlet is the placeholder where nested route content will render */}
+      {/* This is where nested route content will render */}
       <Outlet />
     </div>
   );
