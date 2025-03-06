@@ -1,4 +1,6 @@
 // src/components/TodoList.jsx
+import { render, screen } from '@testing-library/react';
+import TodoList from '../TodoList';
 import React, { useState } from 'react';
 import AddTodoForm from './AddTodoForm';
 
@@ -33,6 +35,18 @@ const TodoList = () => {
     expect(screen.getByText(/Todo List/i)).toBeInTheDocument();
     expect(screen.getByText(/Learn React/i)).toBeInTheDocument();
     expect(screen.getByText(/Learn Jest/i)).toBeInTheDocument();
+  });
+  describe('TodoList Component', () => {
+    test('renders TodoList component', () => {
+      render(<TodoList />);
+  
+      // Check that the Todo List title is rendered
+      expect(screen.getByText(/Todo List/i)).toBeInTheDocument();
+  
+      // Check that the initial todos are displayed
+      expect(screen.getByText(/Learn React/i)).toBeInTheDocument();
+      expect(screen.getByText(/Learn Jest/i)).toBeInTheDocument();
+    });
   });
   
   return (
