@@ -27,7 +27,14 @@ const TodoList = () => {
   const deleteTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
-
+  test('renders TodoList component', () => {
+    render(<TodoList />);
+    console.log(screen.debug());  // This will log the current DOM structure
+    expect(screen.getByText(/Todo List/i)).toBeInTheDocument();
+    expect(screen.getByText(/Learn React/i)).toBeInTheDocument();
+    expect(screen.getByText(/Learn Jest/i)).toBeInTheDocument();
+  });
+  
   return (
     <div>
       <h1>Todo List</h1>
