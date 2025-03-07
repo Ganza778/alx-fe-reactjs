@@ -1,7 +1,6 @@
-import React from "react";
-import FormikForm from "./components/FormikForm";
-import React from "react";
-import RegistrationForm from "./components/registrationForm";
+
+import React from 'react';
+import FormikForm from './components/FormikForm';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -12,6 +11,9 @@ function App() {
 
   return (
     <>
+      <div className="App">
+      <FormikForm />
+    </div>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -28,14 +30,6 @@ function App() {
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
-      </div>
-      <div className="App">
-        <h1>User Registration</h1>
-        <RegistrationForm />
-      </div>
-      <div className="App">
-        <h1>User Registration</h1>
-        <FormikForm />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
