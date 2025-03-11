@@ -1,12 +1,23 @@
 // tailwind.config.js
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",  // This includes all JS, JSX, TS, and TSX files in the src folder
-    "./public/index.html",         // This includes the HTML files in the public folder
+  purge: [
+    "./src/**/*.{js,jsx,ts,tsx}", // Paths to your JS/JSX/TS/TSX files
+    "./public/index.html",        // Include your HTML files
   ],
-  darkMode: false,  // Optional: Set to 'media' or 'class' if you need dark mode support
+  darkMode: 'class', // Enable dark mode using a class
   theme: {
-    extend: {},
+    extend: {
+      // Custom theme extensions like colors, spacing, etc.
+      colors: {
+        customColor: '#1D4ED8', // Example custom color
+      },
+    },
+  },
+  variants: {
+    extend: {
+      // Customize or add new variants here (e.g., 'hover', 'focus', etc.)
+      backgroundColor: ['active', 'group-hover'], // Add `active` and `group-hover` variants for background color
+    },
   },
   plugins: [],
 };
