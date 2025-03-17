@@ -29,6 +29,10 @@ const HomePage = () => {
             <Link to={`/recipe/${recipe.id}`} className="mt-3 block text-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
               View Recipe
             </Link>
+            <Link to="/add-recipe" className="block w-full text-center bg-green-500 text-white px-4 py-2 rounded shadow-md hover:bg-green-600 transition">
+              Add New Recipe
+            </Link>
+
           </div>
         ))}
       </div>
