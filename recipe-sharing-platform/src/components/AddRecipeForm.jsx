@@ -4,29 +4,29 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation
-    if (!title || !ingredients || !steps) {
-      setError("All fields are required.");
+    // Field checks
+    if (!title.trim() || !ingredients.trim() || !steps.trim()) {
+      setErrorMessage("All fields are required.");
       return;
     }
 
-    if (ingredients.split(",").length < 2) {
-      setError("Please include at least two ingredients.");
+    if (ingredients.split(",").filter((item) => item.trim()).length < 2) {
+      setErrorMessage("Please include at least two ingredients.");
       return;
     }
 
-    setError(""); // Clear errors if any
+    setErrorMessage(""); // Clear previous errors
 
-    // Example: Handle form submission (e.g., send to API or store in state)
+    // Structure the new recipe data
     const newRecipe = {
       title,
-      ingredients: ingredients.split(",").map((item) => item.trim()), // Convert to array
-      steps: steps.split(".").map((item) => item.trim()), // Convert to array
+      ingredients: ingredients.split(",").map((item) => item.trim()),
+      steps: steps.split(".").map((item) => item.trim()),
     };
 
     console.log("Recipe submitted:", newRecipe);
@@ -42,7 +42,7 @@ const AddRecipeForm = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-3xl font-bold text-center mb-4">Add New Recipe</h1>
 
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {errorMessage && <p className="text-red-500 text-center mb-4">{errorMessage}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
