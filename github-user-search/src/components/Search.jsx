@@ -21,10 +21,10 @@ const Search = () => {
       if (data) {
         setUserData(data); // If user found, update userData
       } else {
-        setErrorMessage('Looks like we can\'t find the user'); // Show error if no user data is returned
+        setErrorMessage('Looks like we cant find the user'); // Show error if no user data is returned
       }
     } catch (error) {
-      setErrorMessage('Looks like we can\'t find the user'); // Show error if API fails or user not found
+      setErrorMessage('Looks like we cant find the user'); // Show error if API fails or user not found
     } finally {
       setLoading(false); // Stop loading
     }
