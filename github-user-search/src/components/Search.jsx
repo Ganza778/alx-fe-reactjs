@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService';  // We'll define this in the service
+import { fetchUserData } from '../services/githubService'; // Import the service to fetch user data
 
 const Search = ({ setUserData, setLoading, setErrorMessage }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // State for storing the search term
 
+  // Handle form submission and fetch user data
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent page reload on form submit
 
-    if (!searchTerm) return;
+    if (!searchTerm) return; // Don't search if input is empty
 
-    setLoading(true);  // Start loading
-    setErrorMessage('');  // Reset previous error message
+    setLoading(true); // Show loading state
+    setErrorMessage(''); // Clear any previous error messages
 
     try {
-      const data = await fetchUserData(searchTerm);  // Fetch user data
-      setUserData(data);  // Set user data on successful response
+      const data = await fetchUserData(searchTerm); // Fetch user data from GitHub
+      setUserData(data); // Set user data to the parent component
     } catch (error) {
-      setErrorMessage('Looks like we can\'t find the user');  // Handle error
+      setErrorMessage('Looks like we can\'t find the user'); // Show error if user not found
     } finally {
-      setLoading(false);  // Stop loading
+      setLoading(false); // Hide loading state after request completes
     }
   };
 
@@ -27,7 +28,7 @@ const Search = ({ setUserData, setLoading, setErrorMessage }) => {
       <input
         type="text"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => setSearchTerm(e.target.value)} // Update state on input change
         placeholder="Enter GitHub username"
       />
       <button type="submit">Search</button>

@@ -9,6 +9,8 @@ import UserProfile from './components/UserProfile';
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);   // State to manage loading status
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSearch = async () => {
     if (searchTerm) {
@@ -25,6 +27,12 @@ function App() {
   return (
     <div className="App">
       <h1>GitHub User Search</h1>
+      <Search 
+        setUserData={setUserData}  // Passing the setter function to Search component
+        setLoading={setLoading}    // Passing the setter function for loading state
+        setErrorMessage={setErrorMessage}  // Passing the setter function for error messages
+      />
+      
       <input
         type="text"
         value={searchTerm}
