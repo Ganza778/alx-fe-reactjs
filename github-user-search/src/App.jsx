@@ -3,7 +3,8 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import UserProfile from './components/UserProfile';
 import { fetchGitHubUser } from './services/githubService';
-
+import Search from './components/Search';
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
