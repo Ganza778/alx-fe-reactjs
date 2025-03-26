@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
+import SearchBar from './components/SearchBar';
+import UserProfile from './components/UserProfile';
+import { fetchGitHubUser } from './services/githubService';
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
