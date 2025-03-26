@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService'; // Import the API function to fetch user data
+import { fetchUserData } from '../services/githubService';  // API call to fetch user data
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState(''); // State for storing the search term
-  const [userData, setUserData] = useState(null);   // State for storing user data
-  const [loading, setLoading] = useState(false);    // State for managing the loading status
-  const [errorMessage, setErrorMessage] = useState(''); // State for managing error messages
+  const [searchTerm, setSearchTerm] = useState(''); // State to handle the search term
+  const [userData, setUserData] = useState(null);   // State to hold the fetched user data
+  const [loading, setLoading] = useState(false);    // State to track loading status
+  const [errorMessage, setErrorMessage] = useState(''); // State to hold the error message
 
-  // Handle the form submission and trigger the API call
+  // Handle form submission and fetch user data
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent form submission from reloading the page
+    event.preventDefault(); // Prevent page refresh on form submit
 
-    if (!searchTerm) return; // Do nothing if the input is empty
+    if (!searchTerm) return; // Don't search if the input is empty
 
-    setLoading(true); // Start the loading indicator
-    setErrorMessage(''); // Clear any previous error messages
+    setLoading(true); // Set loading to true
+    setErrorMessage(''); // Clear any existing error messages
 
     try {
-      const data = await fetchUserData(searchTerm); // Fetch the data using the GitHub API
+      const data = await fetchUserData(searchTerm); // Fetch user data based on search term
       if (data) {
-        setUserData(data); // If data is fetched, update the userData state
+        setUserData(data); // Set user data if found
       } else {
-        setErrorMessage('Looks like we can\'t find the user'); // Set error if no data is returned
+        setErrorMessage('Looks like we can\'t find the user'); // Show error if no user data
       }
     } catch (error) {
-      setErrorMessage('Looks like we can\'t find the user'); // Handle API errors and set the error message
+      setErrorMessage('Looks like we can\'t find the user'); // Show error if the API call fails
     } finally {
-      setLoading(false); // Stop the loading indicator
+      setLoading(false); // Set loading to false after request finishes
     }
   };
 
@@ -42,14 +42,16 @@ const Search = () => {
         <button type="submit">Search</button>
       </form>
 
-      {/* Conditional rendering */}
-      {loading && <p>Loading...</p>} {/* Show loading message while waiting for the response */}
-      {errorMessage && <p>{errorMessage}</p>} {/* Display error message if user is not found or API fails */}
+      {/* Display loading text */}
+      {loading && <p>Loading...</p>}
 
-      {/* Display user data if available */}
+      {/* Display error message */}
+      {errorMessage && <p>{errorMessage}</p>}
+
+      {/* Display user data if found */}
       {userData && !loading && !errorMessage && (
         <div>
-          <h2>{userData.login}</h2> {/* Display GitHub username */}
+          <h2>{userData.login}</h2> {/* Display the GitHub username */}
           <img src={userData.avatar_url} alt={userData.login} width="100" /> {/* Display user avatar */}
           <p>{userData.bio}</p> {/* Display user's bio */}
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
