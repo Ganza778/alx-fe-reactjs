@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService';  // API call to fetch user data
+import { fetchUserData } from '../services/githubService'; // Import the API function to fetch user data
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState(''); // State to handle the search term
-  const [userData, setUserData] = useState(null);   // State to hold the fetched user data
+  const [searchTerm, setSearchTerm] = useState(''); // State for the search term
+  const [userData, setUserData] = useState(null);   // State for the fetched user data
   const [loading, setLoading] = useState(false);    // State to track loading status
-  const [errorMessage, setErrorMessage] = useState(''); // State to hold the error message
+  const [errorMessage, setErrorMessage] = useState(''); // State for the error message
 
-  // Handle form submission and fetch user data
+  // Handle the form submission and fetch user data
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent page refresh on form submit
 
     if (!searchTerm) return; // Don't search if the input is empty
 
-    setLoading(true); // Set loading to true
+    setLoading(true); // Start loading
     setErrorMessage(''); // Clear any existing error messages
 
     try {
-      const data = await fetchUserData(searchTerm); // Fetch user data based on search term
+      const data = await fetchUserData(searchTerm); // Fetch user data from GitHub API
       if (data) {
-        setUserData(data); // Set user data if found
+        setUserData(data); // If user found, update userData
       } else {
-        setErrorMessage('Looks like we can\'t find the user'); // Show error if no user data
+        setErrorMessage('Looks like we can\'t find the user'); // Show error if no user data is returned
       }
     } catch (error) {
-      setErrorMessage('Looks like we can\'t find the user'); // Show error if the API call fails
+      setErrorMessage('Looks like we can\'t find the user'); // Show error if API fails or user not found
     } finally {
-      setLoading(false); // Set loading to false after request finishes
+      setLoading(false); // Stop loading
     }
   };
 
@@ -42,11 +42,9 @@ const Search = () => {
         <button type="submit">Search</button>
       </form>
 
-      {/* Display loading text */}
-      {loading && <p>Loading...</p>}
-
-      {/* Display error message */}
-      {errorMessage && <p>{errorMessage}</p>}
+      {/* Conditional rendering */}
+      {loading && <p>Loading...</p>} {/* Show loading message */}
+      {errorMessage && <p>{errorMessage}</p>} {/* Display the error message if set */}
 
       {/* Display user data if found */}
       {userData && !loading && !errorMessage && (
